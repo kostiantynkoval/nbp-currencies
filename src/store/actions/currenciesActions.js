@@ -25,5 +25,5 @@ export const fetchAllCurrencies = () => dispatch => {
         console.log('Error while fetching data', err)
         dispatch(failedCurrencies())
       })
-  }, 2000)
+  }, 1000)
 }

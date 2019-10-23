@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {setActiveScreen} from "../../store/actions/screenActions";
 import {getActiveScreen} from "../../store/selectors/screenSelectors"
+import {getFavoritesCodesCount} from "../../store/selectors/favoritesSelectors";
 import {FAVORITES_SCREEN, ALL_CURRENCIES_SCREEN} from "../../store/constants";
 import {
   Navbar,
@@ -15,7 +16,7 @@ import {
 } from 'reactstrap';
 import './styles.css'
 
-const NavPanel = ({setActiveScreen, activeScreen}) => {
+const NavPanel = ({setActiveScreen, activeScreen, favoriteCount}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   
@@ -38,7 +39,7 @@ const NavPanel = ({setActiveScreen, activeScreen}) => {
                 onClick={() => setActiveScreen(FAVORITES_SCREEN)}
                 className={activeScreen === FAVORITES_SCREEN ? 'active' : ''}
                 color="link"
-              >Favorites <Badge color="secondary">0</Badge></Button>
+              >Favorites <Badge color="secondary">{favoriteCount}</Badge></Button>
             </NavItem>
           </Nav>
         </Collapse>
@@ -49,7 +50,8 @@ const NavPanel = ({setActiveScreen, activeScreen}) => {
 
 export default connect(
   state => ({
-    activeScreen: getActiveScreen(state)
+    activeScreen: getActiveScreen(state),
+    favoriteCount: getFavoritesCodesCount(state)
   }),
   dispatch => ({
     setActiveScreen: screen => dispatch(setActiveScreen(screen))

@@ -13,4 +13,5 @@ export const SET_ACTIVE_SCREEN = 'SET_ACTIVE_SCREEN'
 /**
  *  Types for FavoritesData
  * */
-//export const SET_ACTIVE_SCREEN = 'SET_ACTIVE_SCREEN'
+export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES'
+export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES'

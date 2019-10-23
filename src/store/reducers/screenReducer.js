@@ -8,7 +8,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_ACTIVE_SCREEN:
-      console.log('ACTION', action)
       return {
         ...state,
         activeScreen: action.payload
