@@ -1,5 +1,10 @@
 This project is test project. It is simple Application that fetches currencies and allow to do some manipulations as create list of favourites currencies
 
+## Setup Application
+Clone repo from GitHub and run
+
+### `npm install`
+
 ## Available Scripts
 
 In the project directory, you can run:
