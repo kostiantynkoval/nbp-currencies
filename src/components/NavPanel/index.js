@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux'
+import {setActiveScreen} from "../../store/actions/screenActions";
+import {getActiveScreen} from "../../store/selectors/screenSelectors"
+import {FAVORITES_SCREEN, ALL_CURRENCIES_SCREEN} from "../../store/constants";
 import {
   Navbar,
   NavbarBrand,
@@ -9,8 +13,9 @@ import {
   Collapse,
   NavbarToggler,
 } from 'reactstrap';
+import './styles.css'
 
-const NavPanel = (props) => {
+const NavPanel = ({setActiveScreen, activeScreen}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   
@@ -22,10 +27,18 @@ const NavPanel = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <Button color="link">All Currencies</Button>
+              <Button
+                onClick={() => setActiveScreen(ALL_CURRENCIES_SCREEN)}
+                className={activeScreen === ALL_CURRENCIES_SCREEN ? 'active' : ''}
+                color="link"
+              >All Currencies</Button>
             </NavItem>
             <NavItem>
-              <Button color="link">Favorites <Badge color="secondary">0</Badge></Button>
+              <Button
+                onClick={() => setActiveScreen(FAVORITES_SCREEN)}
+                className={activeScreen === FAVORITES_SCREEN ? 'active' : ''}
+                color="link"
+              >Favorites <Badge color="secondary">0</Badge></Button>
             </NavItem>
           </Nav>
         </Collapse>
@@ -34,4 +47,11 @@ const NavPanel = (props) => {
   );
 }
 
-export default NavPanel;
+export default connect(
+  state => ({
+    activeScreen: getActiveScreen(state)
+  }),
+  dispatch => ({
+    setActiveScreen: screen => dispatch(setActiveScreen(screen))
+  })
+)(NavPanel);
